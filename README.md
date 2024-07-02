@@ -59,3 +59,20 @@ El objetivo de este challenge es armar un listado de productos que pueda ser fil
 - Eficiencia: La lógica debe ser eficiente y bien estructurada.
 - Estilado correcto del código
 
+## Resolución
+
+cree 2 hooks para conectar con con los componentes de CategoryFilter, de SearchFilter y de ProductList. 
+
+- simulé el fetcheo inicial de una api con setTimeOut
+- armé el filtro por búsqueda
+- armé el filtro por categoria
+- solo se muestran los elementos que tengan stock > 0
+
+## que me hubiese gustado seguir armando si tuviera más tiempo
+
+- el filtro no es escalable de esa manera, me hubiera gustado ponerlo dentro de una clase strategy por si se agregan filtros futuros pero habia que hacer algo simple.
+- agregar absolute paths.
+- que "brocoli" aparezca en la búsqueda, usar una regex para normalizar el texto y quitar tildes.
+
+  Gracias por la oportunidad! 😊
+
