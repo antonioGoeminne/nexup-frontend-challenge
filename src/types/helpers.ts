@@ -4,3 +4,5 @@ import { ChangeEvent } from 'react';
 export type AnyFunction = (...args: any[]) => any;
 
 export type ChangeEventType = (value: ChangeEvent<HTMLSelectElement>) => void;
+
+export type ChangeEventHandler = (value: ChangeEvent<HTMLInputElement>) => void;
