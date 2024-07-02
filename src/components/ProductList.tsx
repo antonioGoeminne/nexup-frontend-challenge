@@ -5,9 +5,15 @@ import '../styles/ProductList.css';
 
 interface ProductListProps {
   productList: Product[];
+  isLoading: boolean;
 }
 
-export const ProductList: React.FC<ProductListProps> = ({ productList }) => {
+export const ProductList: React.FC<ProductListProps> = ({
+  productList,
+  isLoading,
+}) => {
+  if (isLoading) return <p>Cargando...</p>;
+
   if (!productList) return null;
 
   return (

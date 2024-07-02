@@ -8,12 +8,12 @@ import { useGetProducts } from '../hooks/useGetProducts';
 
 export const ProductManager: React.FC = () => {
   const { filter, handleFilter } = useFilter();
-  const { productList } = useGetProducts({ filter });
+  const { productList, isLoading } = useGetProducts({ filter });
 
   return (
     <div className="wrapper">
       <CategoryFilter handleFilter={handleFilter} />
-      <ProductList productList={productList} />
+      <ProductList isLoading={isLoading} productList={productList} />
     </div>
   );
 };

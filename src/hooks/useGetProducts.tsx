@@ -1,37 +1,6 @@
+import { useEffect, useState } from 'react';
 import { type Product } from '../models/Product';
-import { ProductCategory } from '../models/ProductCategory';
-import { ProductStatus } from '../models/ProductStatus';
-
-const productList: Product[] = [
-  {
-    id: 1,
-    name: 'Banana',
-    price: 1000,
-    status: ProductStatus.Active,
-    category: ProductCategory.Fruit,
-  },
-  {
-    id: 2,
-    name: 'Manzana',
-    price: 1000,
-    status: ProductStatus.Active,
-    category: ProductCategory.Fruit,
-  },
-  {
-    id: 3,
-    name: 'Bife',
-    price: 23500,
-    status: ProductStatus.Inactive,
-    category: ProductCategory.Meat,
-  },
-  {
-    id: 4,
-    name: 'Brocolí',
-    price: 40000,
-    status: ProductStatus.Active,
-    category: ProductCategory.Vegetables,
-  },
-];
+import { getProductList } from '../api/products';
 
 interface UseGetProductsProps {
   filter: string;
@@ -39,14 +8,28 @@ interface UseGetProductsProps {
 
 interface UseGetProducts {
   productList: Product[];
+  isLoading: boolean;
 }
 
 export const useGetProducts = ({
   filter,
 }: UseGetProductsProps): UseGetProducts => {
-  if (!filter || filter === 'Todos') return { productList };
+  const [productList, setProductList] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timeId = setTimeout(() => {
+      setProductList(getProductList);
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timeId);
+  }, []);
+
+  if (!filter || filter === 'Todos') return { productList, isLoading };
 
   const filteredProducts = productList.filter((pr) => pr.category === filter);
 
-  return { productList: filteredProducts };
+  return { productList: filteredProducts, isLoading };
 };
