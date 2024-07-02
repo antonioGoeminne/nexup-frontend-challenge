@@ -37,10 +37,12 @@ export const useGetProducts = ({
   const [productList, setProductList] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const productsWithStock = productList.filter((product) => product.stock > 0);
+
   useEffect(() => {
     setIsLoading(true);
     const timeId = setTimeout(() => {
-      setProductList(getProductList);
+      setProductList(getProductList().filter((product) => product.stock > 0));
       setIsLoading(false);
     }, 1000);
 
@@ -49,13 +51,14 @@ export const useGetProducts = ({
 
   if (!filter || filter === 'Todos')
     return {
-      productList: processFilterSearch(productList, searchValue),
+      productList: processFilterSearch(productsWithStock, searchValue),
       isLoading,
     };
 
-  const filteredProducts = processFilterSearch(productList, searchValue).filter(
-    (pr) => pr.category === filter,
-  );
+  const filteredProducts = processFilterSearch(
+    productsWithStock,
+    searchValue,
+  ).filter((pr) => pr.category === filter);
 
   return { productList: filteredProducts, isLoading };
 };

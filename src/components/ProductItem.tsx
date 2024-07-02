@@ -9,13 +9,14 @@ interface ProductItemProps {
 }
 
 export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
-  const { name, status, category, price } = product;
+  const { name, status, category, price, stock } = product;
 
   return (
     <div className="productItem">
       <div>
         <p className="productName">{name}</p>
         <p className="category">{category}</p>
+        <p className="category">{stock}u</p>
       </div>
       <div>
         <p style={{ color: colors[status] }}>{status}</p>
